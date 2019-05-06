@@ -3,11 +3,17 @@ This is my copy of [DeepEHR](https://github.com/NYUMedML/DeepEHR). I've added tw
 My configuration:
 
 win7 with RTX 2070, cuda 10.1.105
+
 anaconda virtual env:
+
 python 3.7.3
+
 cudatoolkit 10.0.130
+
 cudnn 7.3.1
+
 cuda92 1.0
+
 pytorch 1.1.0
 
 
