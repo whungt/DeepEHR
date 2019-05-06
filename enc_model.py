@@ -770,7 +770,12 @@ class trainModel(object):
             self.mask_train.append(Mask.data.cpu().numpy())
 
             correct += self._getAccuracy(output, Disease, Mask)
-            train_loss += loss.data[0]
+            try:
+                train_loss += loss.data[0]
+            except IndexError:
+                #print (loss.data)
+                #print (loss.data[0])
+                train_loss+=loss.data.item()
             j += 1
             if (j % self.log_interval[1] == 0):
                 train_loss_temp = train_loss / np.sum(nRec)
@@ -819,8 +824,10 @@ class trainModel(object):
                     Mask = Mask.squeeze(1)
                     output = output * (1.0 - Mask)
                     Disease = Disease * (1.0 - Mask)
-
-                    test_loss += (self.criterion(output, Disease)).data[0]
+                    try:
+                        test_loss += (self.criterion(output, Disease)).data[0]
+                    except IndexError:
+                        test_loss += (self.criterion(output, Disease)).data.item()
                     correct += self._getAccuracy(output, Disease, Mask)
 
                 self.Y_multi.append(output.data.cpu().numpy())
